@@ -1,6 +1,6 @@
 - name: install pip
-  apt:
-    name: python-pip
+  yum:
+    name: python3-pip
     state: present
 
 - name: pip install docker-py
@@ -8,11 +8,12 @@
     name:
       - docker
       - docker-compose
+    executable: pip3
 
 - name: run container
   docker_container:
     name: wartest
-    image: "{{ image }}"
-    ports: 8081:8080
+    image: "{{ image }}"
+    ports:
+      - 8081:8080
     state: started
- 
